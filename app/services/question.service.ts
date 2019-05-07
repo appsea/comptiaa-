@@ -262,27 +262,25 @@ export class QuestionService {
 
 const QUESTIONS: Array<IQuestion> = [
     {
-        description: "Why PROC FSLIST is used?",
-        explanation: "The FSLIST procedure enables you to browse external files " +
-        "that are not SAS data sets within a SAS session. " +
-        "Because the files are displayed in an interactive window, " +
-        "the procedure provides a highly convenient mechanism for examining file contents.",
+        description: "A technician is creating a batch script that auto-assigns a particular drive share to a drive letter\n" +
+        "upon login. Which of the following commands can accomplish this?",
+        explanation: "http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/enus/net_use.mspx?mfr=true",
         number: "-1",
         options: [{
-            correct: false,
-            description: "A. to write to an external file",
+            correct: true,
+            description: "A. NET USE",
             tag: "A"
         }, {
-            correct: true,
-            description: "B. to read from an external file",
+            correct: false,
+            description: "B. PING",
             tag: "B"
         }, {
             correct: false,
-            description: "C. to sort by date",
+            description: "C. XCOPY",
             tag: "C"
         }, {
             correct: false,
-            description: "D. not a valid statement",
+            description: "D. IPCONFIG",
             tag: "D"
         }]
     }
