@@ -67,7 +67,7 @@ export class SummaryViewModel extends Observable {
     }
 
     get serverQuestionSize() {
-        return !isNaN(this._serverQuestionSize) ? this._serverQuestionSize : 434;
+        return !isNaN(this._serverQuestionSize) ? this._serverQuestionSize : 978;
     }
 
     get isPremium() {

@@ -91,7 +91,7 @@ export class QuestionService {
                 if (!ConnectionService.getInstance().isConnected()) {
                     dialogs.alert("Please connect to internet so that we can prepare quality questions for you!!");
                 } else {
-                    this.readAllQuestions(-1);
+                    this.readAllQuestions();
                 }
             }
         }
@@ -103,7 +103,7 @@ export class QuestionService {
         return this.containsQuestion(question, PersistenceService.getInstance().readFlaggedQuestions());
     }
 
-    readAllQuestions(latestQuestionVersion): Promise<void> {
+    readAllQuestions(): Promise<void> {
 
         return HttpService.getInstance().getQuestions<Array<IQuestion>>().then((questions: Array<IQuestion>) => {
             const oldQuestionSize: number = this.readQuestionSize();
@@ -115,12 +115,9 @@ export class QuestionService {
                         const updatedQuestions: Array<IQuestion> = questions.concat(premiumQuestions);
                         this.saveQuestions(updatedQuestions);
                     });
-            } else if (latestQuestionVersion > 6) {
-                if (oldQuestionSize > questions.length) {
-                    return this.findPremiumRange(questions.length + 1, oldQuestionSize).
-                    then(() => console.log("Loaded Premium Range", questions.length + 1, oldQuestionSize),
-                        (error) => console.error("Error loading premium range", error));
-                }
+            } else if (oldQuestionSize > questions.length) {
+                return this.findPremiumRange(questions.length + 1, oldQuestionSize).then(() => console.log("Loaded Premium Range", questions.length + 1, oldQuestionSize),
+                    (error) => console.error("Error loading premium range", error));
             }
         });
     }
@@ -135,8 +132,8 @@ export class QuestionService {
                     this.saveQuestions(questions);
                     resolve();
                 }).catch((e) => {
-                   console.error("Error Loading Premium Range Questions...", e);
-                   reject(e);
+                console.error("Error Loading Premium Range Questions...", e);
+                reject(e);
             });
         });
     }
@@ -191,7 +188,7 @@ export class QuestionService {
         if (!this._checked) {
             HttpService.getInstance().findLatestQuestionVersion().then((latestQuestionVersion: string) => {
                 if (this.readQuestionVersion() < Number(latestQuestionVersion)) {
-                    this.readAllQuestions(Number(latestQuestionVersion));
+                    this.readAllQuestions();
                     this.saveQuestionVersion(Number(latestQuestionVersion));
                 }
             }).catch((err) => {
@@ -215,8 +212,9 @@ export class QuestionService {
 
     private getRandomNumber(max: number): number {
         const randomNumber = Math.floor(Math.random() * (max));
+        console.log("Getting 14");
 
-        return randomNumber;
+        return 14;
     }
 
     private readFromQuestions(): Promise<IQuestion> {
@@ -262,25 +260,24 @@ export class QuestionService {
 
 const QUESTIONS: Array<IQuestion> = [
     {
-        description: "A technician is creating a batch script that auto-assigns a particular drive share to a drive letter\n" +
-        "upon login. Which of the following commands can accomplish this?",
-        explanation: "http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/enus/net_use.mspx?mfr=true",
+        description: "A server administrator, Anne, has set up a new server on the company's network to provide centralized user and access management. The file permissions on the server have been shared over the network based on user groups divided into departments and do not have administrative rights. This practice is called which of the following?",
+        explanation: "",
         number: "-1",
         options: [{
-            correct: true,
-            description: "A. NET USE",
+            correct: false,
+            description: "A. Logical separation of data",
             tag: "A"
         }, {
             correct: false,
-            description: "B. PING",
+            description: "B. User segregation",
             tag: "B"
         }, {
             correct: false,
-            description: "C. XCOPY",
+            description: "C. Administrative overhead",
             tag: "C"
         }, {
-            correct: false,
-            description: "D. IPCONFIG",
+            correct: true,
+            description: "D. Principle of least privilege",
             tag: "D"
         }]
     }

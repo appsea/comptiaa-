@@ -16,7 +16,7 @@ describe("Question Service", () => {
         const q: QuestionService = QuestionService.getInstance();
         TKUnit.assert(q.readQuestionSize() === 0 , "Default Question Size is not 0 but is " +  q.readQuestionSize());
 
-        return q.readAllQuestions(-1).then(() => {
+        return q.readAllQuestions().then(() => {
             console.log("q.readQuestionSize():", q.readQuestionSize());
             TKUnit.assert(q.readQuestionSize() === 200 , "Question Size should be 200 but is " +  q.readQuestionSize());
         });
@@ -29,7 +29,7 @@ describe("Question Service", () => {
         const q: QuestionService = QuestionService.getInstance();
         TKUnit.assert(q.readQuestionSize() === 0 , "Default Question Size is not 0 but is " +  q.readQuestionSize());
 
-        return q.readAllQuestions(4).then(() => {
+        return q.readAllQuestions().then(() => {
             console.log("q.readQuestionSize():", q.readQuestionSize());
             TKUnit.assert(q.readQuestionSize() === value , "Question Size should be " + value + " but is "
                 +  q.readQuestionSize());
@@ -44,7 +44,7 @@ describe("Question Service", () => {
         TKUnit.assert(q.readQuestionSize() === 0 , "Default Question Size is not 0 but is " +  q.readQuestionSize());
         TKUnit.saveNumber(constantsModule.QUESTIONS_SIZE, totalQuestions);
 
-        return q.readAllQuestions(4).then(() => {
+        return q.readAllQuestions().then(() => {
             console.log("q.readQuestionSize():", q.readQuestionSize());
             TKUnit.assert(q.readQuestionSize() === totalQuestions , "Question Size should be " + totalQuestions
                 + " but is " +  q.readQuestionSize());

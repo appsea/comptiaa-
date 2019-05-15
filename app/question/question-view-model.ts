@@ -5,6 +5,7 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 import { topmost } from "tns-core-modules/ui/frame";
 import { AdService } from "~/services/ad.service";
 import { QuestionService } from "~/services/question.service";
+import { QuestionUtil } from "~/services/question.util";
 import { SettingsService } from "~/services/settings.service";
 import { StatsService } from "~/services/stats.service";
 import { IOption, IQuestion, IState } from "~/shared/questions.model";
@@ -12,8 +13,6 @@ import * as constantsModule from "../shared/constants";
 import * as navigationModule from "../shared/navigation";
 
 export class QuestionViewModel extends Observable {
-
-    static _errorLoading = false;
 
     get question() {
         if (!this._question) {
@@ -23,15 +22,18 @@ export class QuestionViewModel extends Observable {
         for (const option of this._question.options) {
             if (option.description.startsWith("A.")) {
                 option.description = option.description.replace("A. ", "").trim();
-            }
-            if (option.description.startsWith("B.")) {
+            } else if (option.description.startsWith("B.")) {
                 option.description = option.description.replace("B. ", "").trim();
-            }
-            if (option.description.startsWith("C.")) {
+            } else if (option.description.startsWith("C.")) {
                 option.description = option.description.replace("C. ", "").trim();
-            }
-            if (option.description.startsWith("D.")) {
+            } else if (option.description.startsWith("D.")) {
                 option.description = option.description.replace("D. ", "").trim();
+            } else if (option.description.startsWith("E.")) {
+                option.description = option.description.replace("E. ", "").trim();
+            } else if (option.description.startsWith("F.")) {
+                option.description = option.description.replace("F. ", "").trim();
+            } else if (option.description.startsWith("G.")) {
+                option.description = option.description.replace("G. ", "").trim();
             }
         }
 
@@ -56,11 +58,20 @@ export class QuestionViewModel extends Observable {
         return this._questionNumber;
     }
 
+    get showAdOnNext(): boolean {
+        return !QuestionViewModel._errorLoading && AdService.getInstance().showAd
+            && this.questionNumber % constantsModule.AD_COUNT === 0
+            && this.count % constantsModule.AD_COUNT === 0;
+    }
+
+    static _errorLoading = false;
+
     static showDrawer() {
         const sideDrawer: RadSideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
     }
 
+    bomolean;
     private count: number = 0;
 
     private _questionService: QuestionService;
@@ -82,18 +93,16 @@ export class QuestionViewModel extends Observable {
         this.showFromState();
     }
 
+    hasMultipleOption() {
+        const count = QuestionUtil.countCorrectOptions(this._question);
+    }
+
     showInterstitial(): any {
         if (AdService.getInstance().showAd && this.count > 1
             && (this.questionNumber - 1) % constantsModule.AD_COUNT === 0
             && (((this.count - 1) % constantsModule.AD_COUNT) === 0)) {
             AdService.getInstance().showInterstitial();
         }
-    }
-
-    get showAdOnNext(): boolean {
-        return !QuestionViewModel._errorLoading && AdService.getInstance().showAd
-            && this.questionNumber % constantsModule.AD_COUNT === 0
-            && this.count % constantsModule.AD_COUNT === 0;
     }
 
     previous(): void {

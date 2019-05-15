@@ -16,8 +16,6 @@ export class HttpService {
     private constructor() {
         const bytes  = AES.decrypt(MONICA, GUPIT);
         HttpService.url = bytes.toString(enc.Utf8);
-        // HttpService.url = "https://comptiaap.firebaseio.com/";
-        // console.log(AES.encrypt(HttpService.url, GUPIT).toString());
     }
 
     showAds(): Promise<string> {
