@@ -2,10 +2,21 @@ import { IQuestion } from "~/shared/questions.model";
 
 export class QuestionUtil {
 
+    static allOptionSelected(question: IQuestion): boolean {
+        return QuestionUtil.countCorrectOptions(question) === QuestionUtil.countSelectedOption(question);
+    }
+
     static isCorrect(question: IQuestion) {
-        let isCorrect: boolean;
+        let isCorrect = false;
         for (const option of question.options) {
-            isCorrect = option.selected && option.correct;
+            if (option.selected) {
+                if (option.correct) {
+                    isCorrect = true;
+                } else {
+                    isCorrect = false;
+                    break;
+                }
+            }
         }
 
         return isCorrect;
@@ -42,5 +53,17 @@ export class QuestionUtil {
         return !this.isCorrect(question);
     }
 
-    private constructor() {}
+    static countSelectedOption(question: IQuestion): number {
+        let count = 0;
+        for (const option of question.options) {
+            if (option.selected) {
+                count = count + 1;
+            }
+        }
+
+        return count;
+    }
+
+    private constructor() {
+    }
 }

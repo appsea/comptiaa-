@@ -40,6 +40,39 @@ export class QuestionViewModel extends Observable {
         return this._question;
     }
 
+    get hasMoreOptions() {
+        return QuestionUtil.countCorrectOptions(this.question) > 1;
+    }
+
+    get correctCount() {
+        switch (QuestionUtil.countCorrectOptions(this.question)) {
+            case 1 : {
+                return "ONE";
+                break;
+            }
+            case 2 : {
+                return "TWO";
+                break;
+            }
+            case 3 : {
+                return "THREE";
+                break;
+            }
+            case 4 : {
+                return "FOUR";
+                break;
+            }
+            case 5 : {
+                return "FIVE";
+                break;
+            }
+            default : {
+                return "ONE";
+                break;
+            }
+        }
+    }
+
     get state() {
         return this._state;
     }
@@ -71,7 +104,6 @@ export class QuestionViewModel extends Observable {
         sideDrawer.showDrawer();
     }
 
-    bomolean;
     private count: number = 0;
 
     private _questionService: QuestionService;
@@ -211,15 +243,24 @@ export class QuestionViewModel extends Observable {
         const selectedOption: IOption = args.view.bindingContext;
         if (selectedOption.selected) {
             selectedOption.selected = false;
-            this.question.skipped = true;
         } else {
             this.question.options.forEach((item, index) => {
-                item.selected = item.tag === selectedOption.tag;
+                if (QuestionUtil.countCorrectOptions(this.question) === 1) {
+                    item.selected = item.tag === selectedOption.tag;
+                } else if (!this.allOptionSelected()) {
+                    if (item.tag === selectedOption.tag) {
+                        item.selected = true;
+                    }
+                }
             });
-            this.question.skipped = false;
         }
+        this.question.skipped = QuestionUtil.isSkipped(this.question);
         this.saveAndPublish(this._mode, this._state);
         QuestionService.getInstance().handleWrongQuestions(this.question);
+    }
+
+    allOptionSelected(): boolean {
+        return QuestionUtil.allOptionSelected(this.question);
     }
 
     saveAndPublish(_mode: string, _state: IState) {
@@ -238,7 +279,7 @@ export class QuestionViewModel extends Observable {
     }
 
     enableSelection(): boolean {
-        return this._question.options.filter((option) => option.selected).length > 0 || this._question.show;
+        return this._question.options.filter((option) => option.selected).length >= QuestionUtil.countCorrectOptions(this.question) || this._question.show;
     }
 
     updatePracticeStats() {

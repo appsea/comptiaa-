@@ -212,9 +212,9 @@ export class QuestionService {
 
     private getRandomNumber(max: number): number {
         const randomNumber = Math.floor(Math.random() * (max));
-        console.log("Getting 14");
+        // console.log("Getting 14");
 
-        return 14;
+        return randomNumber;
     }
 
     private readFromQuestions(): Promise<IQuestion> {
