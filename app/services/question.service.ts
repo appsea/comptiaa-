@@ -235,6 +235,7 @@ export class QuestionService {
     private checkForApplicationUpdate() {
         if (!this._checked) {
             HttpService.getInstance().checkPlayStoreVersion().then((playStoreVersion: string) => {
+                this._checked = true;
                 appVersion.getVersionCode().then((versionCode: string) => {
                     if (Number(playStoreVersion) > Number(versionCode)) {
                         dialogs.confirm({
@@ -248,6 +249,8 @@ export class QuestionService {
                                     utils.openUrl("https://play.google.com/store/apps/details?" +
                                         "id=exuberant.comptia.quiz");
                                 }
+                            } else {
+                                this._checked = true;
                             }
                         });
                     }
