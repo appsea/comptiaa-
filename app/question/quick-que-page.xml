@@ -59,6 +59,7 @@
         <ScrollView id="scrollView" onswipe="handleSwipe">
             <StackLayout class="margin">
                 <Label text="{{ question.description}}" textWrap="true"/>
+                <Label text="{{ 'Choose ' + correctCount + ' answers' }}" class="option-hint" visibility="{{ hasMoreOptions ? 'visible' : 'collapsed' }}" textWrap="true"/>
                 <Repeater items="{{ options }}" row="1" id="optionList" class="m-t-10">
                     <Repeater.itemTemplate>
                         <GridLayout columns="auto,*" tap="selectOption" class="{{ selected ? 'selected m-y-5' : 'not-selected m-y-5' }}">
