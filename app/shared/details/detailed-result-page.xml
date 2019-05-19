@@ -48,7 +48,7 @@
                                         <span text="Question " />
                                         <span text="{{ $index + 1 }}"/>
                                         <span text=" Of "/>
-                                        <span text="{{$parents['ListView'].size }}" />
+                                        <span text="{{$parents['ListView'].questions, $parents['ListView'].questions.length }}" />
                                     </FormattedString.spans>
                                 </FormattedString>
                             </Label.formattedText>
