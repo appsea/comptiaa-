@@ -1,3 +1,4 @@
+import * as Toast from "nativescript-toast";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "tns-core-modules/application";
 import { EventData, Observable } from "tns-core-modules/data/observable";
@@ -152,8 +153,11 @@ export function showAnswer(): void {
 }
 
 export function selectOption(args): void {
-    vm.showAnswer();
     vm.selectOption(args);
-    optionList.refresh();
-    // moveToLast();
+    if (vm.allOptionSelected()) {
+        vm.showAnswer();
+        optionList.refresh();
+    } else {
+        Toast.makeText("Select one more option!", "long").show();
+    }
 }

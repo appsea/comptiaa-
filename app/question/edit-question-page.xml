@@ -34,6 +34,7 @@
                 <Label text="Explanation" class="label font-weight-bold m-b-5"/>
                 <TextView class="input" text="{{ question.explanation }}"></TextView>
                 <Label text="Select correct option" class="label font-weight-bold m-b-5"/>
+                <Label text="{{ 'Choose ' + correctCount + ' answer' }}" class="option-hint" visibility="{{ hasMoreOptions ? 'visible' : 'collapsed' }}" textWrap="true"/>
                 <Repeater items="{{ question.options }}" row="1" id="optionList" class="m-t-10">
                     <Repeater.itemTemplate>
                         <GridLayout columns="auto,*" class="{{ selected ? 'selected m-y-5': 'not-selected m-y-5' }}">

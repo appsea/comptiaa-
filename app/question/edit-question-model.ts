@@ -18,6 +18,39 @@ export class EditQuestionViewModel extends Observable {
     private _originalQuestion: IQuestion;
     private _originalQuestionString: string;
 
+    get hasMoreOptions() {
+        return QuestionUtil.countCorrectOptions(this._question) > 1;
+    }
+
+    get correctCount() {
+        switch (QuestionUtil.countCorrectOptions(this._question)) {
+            case 1 : {
+                return "ONE";
+                break;
+            }
+            case 2 : {
+                return "TWO";
+                break;
+            }
+            case 3 : {
+                return "THREE";
+                break;
+            }
+            case 4 : {
+                return "FOUR";
+                break;
+            }
+            case 5 : {
+                return "FIVE";
+                break;
+            }
+            default : {
+                return "ONE";
+                break;
+            }
+        }
+    }
+
     constructor(state: IState) {
         super();
         this._originalQuestionString = JSON.stringify(state.questions[state.questionNumber - 1]);
@@ -58,9 +91,19 @@ export class EditQuestionViewModel extends Observable {
             selectedOption.selected = false;
         } else {
             this.question.options.forEach((item, index) => {
-                item.selected = item.tag === selectedOption.tag;
+                if (QuestionUtil.countCorrectOptions(this.question) === 1) {
+                    item.selected = item.tag === selectedOption.tag;
+                } else if (!this.allOptionSelected()) {
+                    if (item.tag === selectedOption.tag) {
+                        item.selected = true;
+                    }
+                }
             });
         }
+    }
+
+    allOptionSelected(): boolean {
+        return QuestionUtil.allOptionSelected(this.question);
     }
 
     private publish() {

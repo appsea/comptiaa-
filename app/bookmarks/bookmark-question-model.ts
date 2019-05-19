@@ -5,6 +5,7 @@ import { topmost } from "tns-core-modules/ui/frame";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { AdService } from "~/services/ad.service";
 import { QuestionService } from "~/services/question.service";
+import { QuestionUtil } from "~/services/question.util";
 import { IOption, IQuestion, IState } from "~/shared/questions.model";
 import * as constantsModule from "../shared/constants";
 import * as navigationModule from "../shared/navigation";
@@ -42,6 +43,39 @@ export class BookmarkQuestionModel extends Observable {
             && this.count % constantsModule.AD_COUNT === 0;
     }
 
+    get hasMoreOptions() {
+        return QuestionUtil.countCorrectOptions(this._question) > 1;
+    }
+
+    get correctCount() {
+        switch (QuestionUtil.countCorrectOptions(this._question)) {
+            case 1 : {
+                return "ONE";
+                break;
+            }
+            case 2 : {
+                return "TWO";
+                break;
+            }
+            case 3 : {
+                return "THREE";
+                break;
+            }
+            case 4 : {
+                return "FOUR";
+                break;
+            }
+            case 5 : {
+                return "FIVE";
+                break;
+            }
+            default : {
+                return "ONE";
+                break;
+            }
+        }
+    }
+
     private count: number;
     private _questions: Array<IQuestion> = [];
     private _question: IQuestion;
@@ -56,6 +90,10 @@ export class BookmarkQuestionModel extends Observable {
         this._mode = mode;
         this._message = message;
         this.count = 0;
+    }
+
+    allOptionSelected(): boolean {
+        return QuestionUtil.allOptionSelected(this._question);
     }
 
     showInterstitial(): any {
@@ -141,13 +179,18 @@ export class BookmarkQuestionModel extends Observable {
         const selectedOption: IOption = args.view.bindingContext;
         if (selectedOption.selected) {
             selectedOption.selected = false;
-            this.question.skipped = true;
         } else {
             this.question.options.forEach((item, index) => {
-                item.selected = item.tag === selectedOption.tag;
+                if (QuestionUtil.countCorrectOptions(this._question) === 1) {
+                    item.selected = item.tag === selectedOption.tag;
+                } else if (!this.allOptionSelected()) {
+                    if (item.tag === selectedOption.tag) {
+                        item.selected = true;
+                    }
+                }
             });
-            this.question.skipped = false;
         }
+        this.question.skipped = QuestionUtil.isSkipped(this.question);
         this.publish();
         QuestionService.getInstance().handleWrongQuestions(this.question);
     }
