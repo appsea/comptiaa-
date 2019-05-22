@@ -10,7 +10,7 @@ describe("Question Service", () => {
         TKUnit.assert(q.readQuestionSize() === 0, "Default Question Size is not 0 but is " +  q.readQuestionSize());
     });
 
-    it("ReadAllQuestsion loads 200 questions for non premium users", () => {
+    it("ReadAllQuestsion loads 600 questions for non premium users", () => {
         TKUnit.clearQuestionSize();
         TKUnit.clearKey(constantsModule.PREMIUM);
         const q: QuestionService = QuestionService.getInstance();
@@ -18,12 +18,12 @@ describe("Question Service", () => {
 
         return q.readAllQuestions().then(() => {
             console.log("q.readQuestionSize():", q.readQuestionSize());
-            TKUnit.assert(q.readQuestionSize() === 200 , "Question Size should be 200 but is " +  q.readQuestionSize());
+            TKUnit.assert(q.readQuestionSize() === 600 , "Question Size should be 600 but is " +  q.readQuestionSize());
         });
     });
 
     it("Premium Users have access to all the questions", async () => {
-        const value = 434;
+        const value = constantsModule.TOTAL_QUESTIONS;
         TKUnit.clearQuestionSize();
         TKUnit.saveBoolean(constantsModule.PREMIUM, true);
         const q: QuestionService = QuestionService.getInstance();
@@ -37,7 +37,7 @@ describe("Question Service", () => {
     });
 
     it("Rewarded Questions Loaded again with question update", async () => {
-        const totalQuestions: number = 210;
+        const totalQuestions: number = 610;
         TKUnit.clearQuestionSize();
         TKUnit.clearKey(constantsModule.PREMIUM);
         const q: QuestionService = QuestionService.getInstance();

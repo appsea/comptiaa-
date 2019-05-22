@@ -10,6 +10,7 @@ export const RESULT = "RESULT";
 export const MOCK = "mock-page";
 export const PASSING_PERCENTAGE = 75;
 export const TOTAL_TIME = 90;
+export const TOTAL_QUESTIONS = 978;
 export const TOTAL_QUICK_QUESTIONS = 15;
 export const TOTAL_MOCK_QUESTIONS = 90;
 export const VERSION_NUMBER: number = 12;

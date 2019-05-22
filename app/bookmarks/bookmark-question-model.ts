@@ -125,7 +125,7 @@ export class BookmarkQuestionModel extends Observable {
         if (this._questions.length > this._questionNumber) {
             this._question = this._questions[this._questionNumber];
             this._questionNumber = this._questionNumber + 1;
-            //FIXME: Change Following
+            // FIXME: Change Following
             this._question.options.forEach((item, index) => {
                 item.selected = false;
             });

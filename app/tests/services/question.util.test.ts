@@ -16,3 +16,17 @@ describe("Question Util ", () => {
         TKUnit.assert(actualCorrectAnswers === 2, "Correct option is 3 but actual is "  + actualCorrectAnswers);
     });
 });
+
+describe("Question Util Percentage", () => {
+    it("Expected percentage when number greater than 100", () => {
+        const actualCorrectAnswers = QuestionUtil.validatePercentage(110);
+        TKUnit.assert(actualCorrectAnswers === 100, "Expected percentage as 100 but was "  + actualCorrectAnswers);
+    });
+});
+
+describe("Question Util Percentage 90", () => {
+    it("Expected percentage when number greater than 90", () => {
+        const actualCorrectAnswers = QuestionUtil.validatePercentage(90);
+        TKUnit.assert(actualCorrectAnswers === 90, "Expected percentage as 90 but was "  + actualCorrectAnswers);
+    });
+});

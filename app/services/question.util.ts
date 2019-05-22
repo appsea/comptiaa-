@@ -64,6 +64,10 @@ export class QuestionUtil {
         return count;
     }
 
+    static validatePercentage(percentage: number): number {
+        return percentage < 100 ? percentage : 100;
+    }
+
     private constructor() {
     }
 }
