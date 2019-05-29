@@ -99,7 +99,7 @@ export class SummaryViewModel extends Observable {
     private _mock: IResult;
     private _practiceAccuracy: number;
     private _practiceCoverage: number;
-    private _serverQuestionSize: number = 434;
+    private _serverQuestionSize: number = constantsModule.TOTAL_QUESTIONS;
     private _questionSize: number = 200;
     private _rewards: number = 10;
     private _isPremium: boolean = false;
@@ -120,7 +120,7 @@ export class SummaryViewModel extends Observable {
         this.calculate();
         if (!this._checked && ConnectionService.getInstance().isConnected()) {
             HttpService.getInstance().checkTotalQuestions().then((st) => {
-                this._serverQuestionSize = !isNaN(Number(st)) ? Number(st) : 434;
+                this._serverQuestionSize = !isNaN(Number(st)) ? Number(st) : this._serverQuestionSize;
                 this.calculate();
                 this._checked = true;
             });

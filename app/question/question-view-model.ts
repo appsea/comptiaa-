@@ -125,10 +125,6 @@ export class QuestionViewModel extends Observable {
         this.showFromState();
     }
 
-    hasMultipleOption() {
-        const count = QuestionUtil.countCorrectOptions(this._question);
-    }
-
     showInterstitial(): any {
         if (AdService.getInstance().showAd && this.count > 1
             && (this.questionNumber - 1) % constantsModule.AD_COUNT === 0
@@ -233,6 +229,12 @@ export class QuestionViewModel extends Observable {
         navigationModule.gotoResultPage(this._state);
     }
 
+    showIfSelected() {
+        if (this.allOptionSelected()) {
+            this.showAnswer();
+        }
+    }
+
     showAnswer(): void {
         this.question.options.forEach((option) => option.show = true);
         this.question.show = true;
@@ -284,6 +286,10 @@ export class QuestionViewModel extends Observable {
 
     updatePracticeStats() {
         StatsService.getInstance().updatePracticeStats(this.question);
+    }
+
+    multipleChoiceQuestion(): boolean {
+        return QuestionUtil.countCorrectOptions(this._question) > 1;
     }
 
     private increment() {
