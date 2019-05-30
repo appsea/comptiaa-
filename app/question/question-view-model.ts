@@ -159,7 +159,7 @@ export class QuestionViewModel extends Observable {
 
     flag(): void {
         this._questionService.handleFlagQuestion(this._question);
-        this.publish();
+        this.saveAndPublish(this._mode, this._state);
     }
 
     alreadyAsked(newQuestion: IQuestion): boolean {
