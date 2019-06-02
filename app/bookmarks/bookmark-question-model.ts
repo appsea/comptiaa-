@@ -128,7 +128,9 @@ export class BookmarkQuestionModel extends Observable {
             // FIXME: Change Following
             this._question.options.forEach((item, index) => {
                 item.selected = false;
+                item.show = false;
             });
+            this._question.show = false;
             this.increment();
             this.publish();
             this.showInterstitial();

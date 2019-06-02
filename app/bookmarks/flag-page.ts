@@ -157,8 +157,8 @@ export function selectOption(args): void {
     vm.selectOption(args);
     if (vm.allOptionSelected()) {
         vm.showAnswer();
-        optionList.refresh();
     } else {
         Toast.makeText("Select one more option!", "long").show();
     }
+    optionList.refresh();
 }
