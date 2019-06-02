@@ -136,11 +136,10 @@ export function showAnswer(): void {
 
 export function selectOption(args): void {
     vm.selectOption(args);
-    if (vm.allOptionSelected()) {
-        optionList.refresh();
-    } else {
+    if (!vm.allOptionSelected()) {
         Toast.makeText("Select one more option!", "long").show();
     }
+    optionList.refresh();
 }
 
 export function goToEditPage(): void {
