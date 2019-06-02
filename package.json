@@ -31,7 +31,7 @@
     "nativescript-ui-chart": "^3.9.1",
     "nativescript-ui-sidedrawer": "~5.0.0",
     "rxjs": "~6.2.0",
-    "tns-core-modules": "^5.4.0"
+    "tns-core-modules": "^5.4.1"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.5",
