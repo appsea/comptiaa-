@@ -53,7 +53,7 @@
                     <Label col="0" text="&#xf164;" class="fa c-white tick m-x-20"></Label>
                     <StackLayout col="1" verticalAlignment="center">
                         <Label text="Thumbs up!" class="feature" textWrap="true"/>
-                        <Label class="description" text="Best way to appreciate our efforts."/>
+                        <Label class="description" text="Support us to do better."/>
                     </StackLayout>
                 </GridLayout>
             </GridLayout>
