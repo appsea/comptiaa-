@@ -57,4 +57,3 @@ jobs:
 -H "Authorization: Bearer $TOKEN" \
 -H "Content-Type: application/octet-stream" \
 "https://www.googleapis.com/upload/storage/v1/b/aab/o?uploadType=media&name=comptiaaplus.aab"
-      - run: java -jar release-manager-1.1.jar -key "key.json" -file "comptiaaplus.aab" -track "internal" -name "myApp" -notes "Thank you for using CompTIA A+ Quiz. We keep bringing new updates to make user experience better. This time you have loads of features and improvements.We strongly recommend you to keep CompTIA A+ Quiz updated. We love to hear back to make CompTIA A+ Quiz better than what it is today so please share feedback on exuberant.avatar@gmail.com and rate us on play store. Thank you again!!!"
