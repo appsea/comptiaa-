@@ -8,8 +8,11 @@ export function onDrawerButtonTap(args: EventData) {
 }
 
 export function onPageLoaded(args: EventData) {
-    if (!QuestionService.getInstance().hasQuestions()) {
-        QuestionService.getInstance().checkQuestionUpdate();
+    if (QuestionService.getInstance().hasQuestions()) {
+        navigationModule.route();
+    } else {
+        QuestionService.getInstance().readAllQuestions().then(() => {
+            navigationModule.route();
+        });
     }
-    navigationModule.route();
 }

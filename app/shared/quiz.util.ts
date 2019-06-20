@@ -1,3 +1,7 @@
+import { isAndroid, isIOS } from "tns-core-modules/platform";
+import * as frame from "tns-core-modules/ui/frame";
+import * as utils from "tns-core-modules/utils/utils";
+
 export class QuizUtil {
 
     static days: Array<string> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -21,6 +25,14 @@ export class QuizUtil {
         dateString += ":" + (minutes < 10 ? "0" + minutes : minutes);
 
         return dateString;
+    }
+
+    static hideKeyboard() {
+        if (isAndroid) {
+            utils.ad.dismissSoftInput();
+        } else if (isIOS) {
+            frame.topmost().nativeView.endEditing(true);
+        }
     }
 
     private constructor() {
