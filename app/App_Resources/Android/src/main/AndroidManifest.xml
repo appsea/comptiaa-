@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	package="__PACKAGE__"
-	android:versionCode="10020"
+	android:versionCode="10021"
 	android:versionName="1.0.0">
 
 	<supports-screens

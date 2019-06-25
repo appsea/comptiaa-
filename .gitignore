@@ -12,6 +12,7 @@ platforms/
 *.css
 !ads.js
 !admob-common.js
+app/admob/ad.service.js
 
 # Logs
 logs
