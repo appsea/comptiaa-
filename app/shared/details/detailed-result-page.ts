@@ -6,6 +6,7 @@ import { topmost } from "tns-core-modules/ui/frame";
 import * as ListView from "tns-core-modules/ui/list-view";
 import { NavigatedData, Page } from "tns-core-modules/ui/page";
 import { QuestionViewModel } from "~/question/question-view-model";
+import { QuizUtil } from "~/shared/quiz.util";
 import * as navigationModule from "../navigation";
 import { IState } from "../questions.model";
 import { DetailedResultViewModel } from "./detailed-result-view-model";
@@ -33,6 +34,10 @@ export function onNavigatingTo(args: NavigatedData): void {
     const state: IState = <IState> page.navigationContext;
     vm = new DetailedResultViewModel(state);
     page.bindingContext = vm;
+}
+
+export function onNavigatedFrom(args): void {
+    QuizUtil.hideKeyboard();
 }
 
 export function onDrawerButtonTap(args: EventData) {
