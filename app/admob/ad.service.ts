@@ -21,7 +21,7 @@ export class AdService {
         this._showAd = showAd;
     }
 
-    static _testing = true;
+    static _testing = false;
 
     static getInstance(): AdService {
         return AdService._instance;
