@@ -27,6 +27,20 @@ export class QuizUtil {
         return dateString;
     }
 
+    static showKeyboard(myTextfield) {
+        if (myTextfield.ios) {
+            myTextfield.focus();
+        }
+
+        if (myTextfield.android) {
+            setTimeout(() => {
+                myTextfield.android.requestFocus();
+                const imm = utils.ad.getInputMethodManager();
+                imm.showSoftInput(myTextfield.android, 0);
+            }, 300);
+        }
+    }
+
     static hideKeyboard() {
         if (isAndroid) {
             utils.ad.dismissSoftInput();
