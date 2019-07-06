@@ -4,7 +4,7 @@ var admob = require("./admob-common");
 var frame = require("tns-core-modules/ui/frame");
 
 // need to cache this baby since after an Interstitial was shown a second won't resolve the activity
-admob.activity = null;
+admob.activity = application.android.foregroundActivity;
 
 admob._md5 = function (input) {
     try {
@@ -57,7 +57,7 @@ admob._getBannerType = function (size) {
 };
 
 admob._getActivity = function () {
-    if (admob.activity === null) {
+    if (admob.activity === null || typeof admob.activity === 'undefined') {
         admob.activity = application.android.foregroundActivity;
     }
     return admob.activity;
@@ -169,155 +169,155 @@ admob.adLoaded = function() {
 
 admob.createBanner = function (arg) {
     return new Promise(function (resolve, reject) {
-      try {
-        // always close a previous opened banner
-        if (admob.adView !== null && admob.adView !== undefined) {
-          var parent = admob.adView.getParent();
-          if (parent !== null) {
-            parent.removeView(admob.adView);
-          }
-        }
-        var settings = admob.merge(arg, admob.defaults);
-        admob.adView = new com.google.android.gms.ads.AdView(admob._getActivity());
-        admob.adView.setAdUnitId(settings.androidBannerId);
-        var bannerType = admob._getBannerType(settings.size);
-        admob.adView.setAdSize(bannerType);
-        // TODO consider implementing events, after v1
-        //admob.adView.setAdListener(new com.google.android.gms.ads.BannerListener());
-  
-        var ad = admob._buildAdRequest(settings);
-        admob.adView.loadAd(ad);
-  
-        var density = utils.layout.getDisplayDensity(),
-            top = settings.margins.top * density,
-            bottom = settings.margins.bottom * density;
-  
-        var relativeLayoutParams = new android.widget.RelativeLayout.LayoutParams(
-            android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,
-            android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-  
-        if (bottom > -1) {
-          relativeLayoutParams.bottomMargin = bottom;
-          relativeLayoutParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM);
-        } else {
-          if (top > -1) {
-            relativeLayoutParams.topMargin = top;
-          }
-          relativeLayoutParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
-        }
-  
-        var adViewLayout = new android.widget.RelativeLayout(admob._getActivity());
-        adViewLayout.addView(admob.adView, relativeLayoutParams);
-  
-        var relativeLayoutParamsOuter = new android.widget.RelativeLayout.LayoutParams(
-            android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,
-            android.widget.RelativeLayout.LayoutParams.MATCH_PARENT);
-  
-        // Wrapping it in a timeout makes sure that when this function is loaded from a Page.loaded event 'frame.topmost()' doesn't resolve to 'undefined'.
-        // Also, in NativeScript 4+ it may be undefined anyway.. so using the appModule in that case.
-        setTimeout(function () {
-          var topmost = frame.topmost();
-          if (topmost !== undefined) {
-            topmost.currentPage &&
-            topmost.currentPage.android &&
-            topmost.currentPage.android.getParent() &&
-            topmost.currentPage.android.getParent().addView(adViewLayout, relativeLayoutParamsOuter);
-          } else {
-            application.android &&
-            application.android.foregroundActivity &&
-            application.android.foregroundActivity.getWindow() &&
-            application.android.foregroundActivity.getWindow().getDecorView() &&
-            application.android.foregroundActivity.getWindow().getDecorView().addView(adViewLayout, relativeLayoutParamsOuter);
-          }
-        }, 0);
-  
-        resolve();
-      } catch (ex) {
-        console.log("Error in admob.createBanner: ", ex);
-        console.error(ex.stack);
-        reject(ex);
-      }
-    });
-  };
-
-  admob.createInterstitial = function (arg) {
-    return new Promise(function (resolve, reject) {
-      admob.preloadInterstitial(arg)
-          .then(function () {
-            admob.showInterstitial().then(resolve);
-          })
-          .catch(reject);
-    });
-  };
-
-  admob.hideBanner = function (arg) {
-    return new Promise(function (resolve, reject) {
-      try {
-        if (admob.adView != null) {
-          var parent = admob && admob.adView && admob.adView.getParent();
-          if (parent != null) {
-            parent.removeView(admob.adView);
-          }
-          admob.adView = null;
-        }
-        resolve();
-      } catch (ex) {
-        console.log("Error in admob.hideBanner: " + ex);
-        reject(ex);
-      }
-    });
-  };
-  
-  admob.preloadInterstitial = function (arg) {
-    return new Promise(function (resolve, reject) {
-      try {
-        var settings = admob.merge(arg, admob.defaults);
-        admob.interstitialView = new com.google.android.gms.ads.InterstitialAd(admob._getActivity());
-        admob.interstitialView.setAdUnitId(settings.androidInterstitialId);
-  
-        // Interstitial ads must be loaded before they can be shown, so adding a listener
-        var InterstitialAdListener = com.google.android.gms.ads.AdListener.extend({
-          onAdLoaded: function () {
-            console.log("onAdLoaded");
-            resolve();
-          },
-          onAdFailedToLoad: function (errorCode) {
-            console.log("onAdFailedToLoad: " + errorCode);
-            reject(errorCode);
-          },
-          onAdClosed: function () {
-            if (admob.interstitialView) {
-              admob.interstitialView.setAdListener(null);
-              admob.interstitialView = null;
+        try {
+            // always close a previous opened banner
+            if (admob.adView !== null && admob.adView !== undefined) {
+                var parent = admob.adView.getParent();
+                if (parent !== null) {
+                    parent.removeView(admob.adView);
+                }
             }
-            arg.onAdClosed && arg.onAdClosed();
-          }
-        });
-        admob.interstitialView.setAdListener(new InterstitialAdListener());
-  
-        var ad = admob._buildAdRequest(settings);
-        admob.interstitialView.loadAd(ad);
-      } catch (ex) {
-        console.log("Error in admob.preloadInterstitial: " + ex);
-        reject(ex);
-      }
-    });
-  };
-  
-  admob.showInterstitial = function () {
-    return new Promise(function (resolve, reject) {
-      try {
-        if (admob.interstitialView) {
-          admob.interstitialView.show();
-          resolve();
-        } else {
-          reject("Please call 'preloadInterstitial' first.");
+            var settings = admob.merge(arg, admob.defaults);
+            admob.adView = new com.google.android.gms.ads.AdView(admob._getActivity());
+            admob.adView.setAdUnitId(settings.androidBannerId);
+            var bannerType = admob._getBannerType(settings.size);
+            admob.adView.setAdSize(bannerType);
+            // TODO consider implementing events, after v1
+            //admob.adView.setAdListener(new com.google.android.gms.ads.BannerListener());
+
+            var ad = admob._buildAdRequest(settings);
+            admob.adView.loadAd(ad);
+
+            var density = utils.layout.getDisplayDensity(),
+                top = settings.margins.top * density,
+                bottom = settings.margins.bottom * density;
+
+            var relativeLayoutParams = new android.widget.RelativeLayout.LayoutParams(
+                android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,
+                android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+            if (bottom > -1) {
+                relativeLayoutParams.bottomMargin = bottom;
+                relativeLayoutParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM);
+            } else {
+                if (top > -1) {
+                    relativeLayoutParams.topMargin = top;
+                }
+                relativeLayoutParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
+            }
+
+            var adViewLayout = new android.widget.RelativeLayout(admob._getActivity());
+            adViewLayout.addView(admob.adView, relativeLayoutParams);
+
+            var relativeLayoutParamsOuter = new android.widget.RelativeLayout.LayoutParams(
+                android.widget.RelativeLayout.LayoutParams.MATCH_PARENT,
+                android.widget.RelativeLayout.LayoutParams.MATCH_PARENT);
+
+            // Wrapping it in a timeout makes sure that when this function is loaded from a Page.loaded event 'frame.topmost()' doesn't resolve to 'undefined'.
+            // Also, in NativeScript 4+ it may be undefined anyway.. so using the appModule in that case.
+            setTimeout(function () {
+                var topmost = frame.topmost();
+                if (topmost !== undefined) {
+                    topmost.currentPage &&
+                    topmost.currentPage.android &&
+                    topmost.currentPage.android.getParent() &&
+                    topmost.currentPage.android.getParent().addView(adViewLayout, relativeLayoutParamsOuter);
+                } else {
+                    application.android &&
+                    application.android.foregroundActivity &&
+                    application.android.foregroundActivity.getWindow() &&
+                    application.android.foregroundActivity.getWindow().getDecorView() &&
+                    application.android.foregroundActivity.getWindow().getDecorView().addView(adViewLayout, relativeLayoutParamsOuter);
+                }
+            }, 0);
+
+            resolve();
+        } catch (ex) {
+            console.log("Error in admob.createBanner: ", ex);
+            console.error(ex.stack);
+            reject(ex);
         }
-      } catch (ex) {
-        console.log("Error in admob.showInterstitial: " + ex);
-        reject(ex);
-      }
     });
-  };
-  
+};
+
+admob.createInterstitial = function (arg) {
+    return new Promise(function (resolve, reject) {
+        admob.preloadInterstitial(arg)
+            .then(function () {
+                admob.showInterstitial().then(resolve);
+            })
+            .catch(reject);
+    });
+};
+
+admob.hideBanner = function (arg) {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (admob.adView != null) {
+                var parent = admob && admob.adView && admob.adView.getParent();
+                if (parent != null) {
+                    parent.removeView(admob.adView);
+                }
+                admob.adView = null;
+            }
+            resolve();
+        } catch (ex) {
+            console.log("Error in admob.hideBanner: " + ex);
+            reject(ex);
+        }
+    });
+};
+
+admob.preloadInterstitial = function (arg) {
+    return new Promise(function (resolve, reject) {
+        try {
+            var settings = admob.merge(arg, admob.defaults);
+            admob.interstitialView = new com.google.android.gms.ads.InterstitialAd(admob._getActivity());
+            admob.interstitialView.setAdUnitId(settings.androidInterstitialId);
+
+            // Interstitial ads must be loaded before they can be shown, so adding a listener
+            var InterstitialAdListener = com.google.android.gms.ads.AdListener.extend({
+                onAdLoaded: function () {
+                    console.log("onAdLoaded");
+                    resolve();
+                },
+                onAdFailedToLoad: function (errorCode) {
+                    console.log("onAdFailedToLoad: " + errorCode);
+                    reject(errorCode);
+                },
+                onAdClosed: function () {
+                    if (admob.interstitialView) {
+                        admob.interstitialView.setAdListener(null);
+                        admob.interstitialView = null;
+                    }
+                    arg.onAdClosed && arg.onAdClosed();
+                }
+            });
+            admob.interstitialView.setAdListener(new InterstitialAdListener());
+
+            var ad = admob._buildAdRequest(settings);
+            admob.interstitialView.loadAd(ad);
+        } catch (ex) {
+            console.log("Error in admob.preloadInterstitial: " + ex);
+            reject(ex);
+        }
+    });
+};
+
+admob.showInterstitial = function () {
+    return new Promise(function (resolve, reject) {
+        try {
+            if (admob.interstitialView) {
+                admob.interstitialView.show();
+                resolve();
+            } else {
+                reject("Please call 'preloadInterstitial' first.");
+            }
+        } catch (ex) {
+            console.log("Error in admob.showInterstitial: " + ex);
+            reject(ex);
+        }
+    });
+};
+
 module.exports = admob;

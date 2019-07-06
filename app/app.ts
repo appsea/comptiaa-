@@ -9,9 +9,6 @@ import * as application from "tns-core-modules/application";
 import { isAndroid } from "tns-core-modules/platform";
 import { setTimeout } from "tns-core-modules/timer";
 import * as frame from "tns-core-modules/ui/frame";
-import { AdService } from "~/admob/ad.service";
-import { QuestionViewModel } from "~/question/question-view-model";
-import { PersistenceService } from "~/services/persistence.service";
 
 purchase.init([
     "comptia.aplus.premium"
@@ -35,16 +32,6 @@ application.on(application.uncaughtErrorEvent, (args) => {
     }
 });
 
-setTimeout(() => {
-    if (!PersistenceService.getInstance().isPremium()) {
-        AdService.getInstance().doPreloadInterstitial(() => {
-                QuestionViewModel._errorLoading = false;
-            },
-            () => {
-                QuestionViewModel._errorLoading = true;
-            });
-    }
-}, 1000);
 application.run({moduleName: "app-root/app-root"});
 /*
 Do not place any code after the application has been started as it will not
