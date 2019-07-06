@@ -2,7 +2,7 @@
         class="page"
         loaded="onPageLoaded"
         navigatingTo="onNavigatingTo"
-        navigatedFrom="onNavigatingFrom"
+        navigatedFrom="onNavigatedFrom"
         xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
