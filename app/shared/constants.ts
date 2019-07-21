@@ -1,5 +1,3 @@
-export const MONICA = "U2FsdGVkX19ZQDdBwrIpoxfSaaltY9/4+UcioaVyN8WxqCT8TfnthFS0mG7a4HRkJ3HsPj02VtrMWnud9WpqPA==";
-export const GUPIT = "comptiaa+";
 export const INTERSTITIAL_AD_ID = "ca-app-pub-9082814869788754/2828571378";
 export const BANNER_AD_ID = "ca-app-pub-9082814869788754/3224157199";
 export const REWARD_AD_ID = "ca-app-pub-9082814869788754/9406422167";
