@@ -151,6 +151,7 @@ export class QuestionService {
     }
 
     saveQuestions(questions: Array<IQuestion>): void {
+        this.questions = questions;
         const json: string = JSON.stringify(questions);
         appSettings.setString(constantsModule.QUESTIONS, json);
         appSettings.setNumber(constantsModule.QUESTIONS_SIZE, questions.length);
@@ -246,6 +247,7 @@ export class QuestionService {
 
     private checkForApplicationUpdate() {
         if (!this._checked) {
+            this._checked = true;
             HttpService.getInstance().checkPlayStoreVersion().then((playStoreVersion: string) => {
                 this._checked = true;
                 appVersion.getVersionCode().then((versionCode: string) => {
