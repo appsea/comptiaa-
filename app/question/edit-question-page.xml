@@ -37,13 +37,13 @@
                 <Label text="{{ 'Choose ' + correctCount + ' answers' }}" class="option-hint" visibility="{{ hasMoreOptions ? 'visible' : 'collapsed' }}" textWrap="true"/>
                 <Repeater items="{{ question.options }}" row="1" id="optionList" class="m-t-10">
                     <Repeater.itemTemplate>
-                        <GridLayout columns="auto,*" class="{{ selected ? 'selected m-y-5': 'not-selected m-y-5' }}">
+                        <GridLayout columns="auto,*" tap="selectOption" class="{{ selected ? 'selected m-y-5': 'not-selected m-y-5' }}">
                             <Label col="0" text="{{ tag + '. ' }}"
                                    class="{{ selected ? 'selected m-y-10': 'not-selected m-y-10' }}"
-                                   textWrap="true" tap="selectOption"/>
+                                   textWrap="true"/>
                             <Label col="1" text="{{ description }}"
                                    class="{{ selected ? 'selected m-y-10': 'not-selected m-y-10' }}"
-                                   textWrap="true" tap="selectOption"/>
+                                   textWrap="true"/>
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>

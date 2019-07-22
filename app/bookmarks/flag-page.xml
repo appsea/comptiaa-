@@ -65,13 +65,13 @@
                 <Label text="{{ 'Choose ' + correctCount + ' answers' }}" class="option-hint" visibility="{{ hasMoreOptions ? 'visible' : 'collapsed' }}" textWrap="true"/>
                 <Repeater items="{{ options }}" row="1" id="optionList" class="m-t-10">
                     <Repeater.itemTemplate>
-                        <GridLayout columns="auto,*" class="{{ (!show && selected) ? 'selected m-y-5' : (show && correct)? 'correct m-y-5' : (show && selected && !correct)? 'incorrect m-y-5': 'not-selected m-y-5' }}">
+                        <GridLayout columns="auto,*" tap="selectOption" class="{{ (!show && selected) ? 'selected m-y-5' : (show && correct)? 'correct m-y-5' : (show && selected && !correct)? 'incorrect m-y-5': 'not-selected m-y-5' }}">
                             <Label col="0" text="{{ tag + '. ' }}"
                                    class="{{ (!show && selected) ? 'selected m-l-2 m-y-10' : (show && correct)? 'correct m-l-2 m-y-10' : (show && selected && !correct)? 'incorrect m-l-2 m-y-10': 'not-selected m-l-2 m-y-10' }}"
-                                   textWrap="true" tap="selectOption"/>
+                                   textWrap="true" />
                             <Label col="1" text="{{ description }}"
                                    class="{{ (!show && selected) ? 'selected m-y-10' : (show && correct)? 'correct m-y-10' : (show && selected && !correct)? 'incorrect m-y-10': 'not-selected m-y-10' }}"
-                                   textWrap="true" tap="selectOption"/>
+                                   textWrap="true"/>
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>
