@@ -58,7 +58,7 @@ export function navigate(args: EventData): void {
 }
 
 export function share(args: EventData): void {
-    SocialShare.shareText("http://bit.ly/comptiaaplusapp\n" +
+    SocialShare.shareText("https://play.google.com/store/apps/details?id=exuberant.comptia.quiz\n" +
         "Hi there, Take a look at the CompTIA A+ Quiz which I am using for preparing For CompTIA A+ Certification!!!");
 }
 
