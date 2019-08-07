@@ -260,8 +260,9 @@ export class QuestionService {
                         }).then((proceed) => {
                             if (proceed) {
                                 if (isAndroid) {
-                                    utils.openUrl("https://play.google.com/store/apps/details?" +
-                                        "id=exuberant.comptia.quiz");
+                                    utils.openUrl("https://play.google.com/store/apps/details?id=exuberant.comptia.quiz");
+                                } else {
+                                    utils.openUrl("https://apps.apple.com/app/dvsa-lgv/id310633997");
                                 }
                             } else {
                                 this._checked = true;
