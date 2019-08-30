@@ -1,11 +1,11 @@
 import { EventData, Observable, PropertyChangeData } from "tns-core-modules/data/observable";
+import { isIOS } from "tns-core-modules/platform";
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { QuestionUtil } from "~/services/question.util";
 import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../observable-property-decorator";
 import { IQuestion, IState } from "../questions.model";
-import { isIOS } from "tns-core-modules/platform";
 
 declare const IQKeyboardManager: any;
 
