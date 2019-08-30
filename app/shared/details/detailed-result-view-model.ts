@@ -5,6 +5,7 @@ import { QuestionUtil } from "~/services/question.util";
 import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../observable-property-decorator";
 import { IQuestion, IState } from "../questions.model";
+import { isIOS } from "tns-core-modules/platform";
 
 declare const IQKeyboardManager: any;
 
