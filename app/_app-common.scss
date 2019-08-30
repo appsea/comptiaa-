@@ -2,6 +2,7 @@
 // This is where the vast majority of your CSS code goes.
 @import 'app-variables';
 
+
 // Common page class
 .page-content {
 
@@ -62,9 +63,9 @@ ActionBar .flagged {
 }
 
 ActionBar .action-bar-icons {
-  horizontal-align: right;
-  color: white;
-  margin-right: 10;
+    horizontal-align: right;
+    color: white;
+    margin-right: 10;
 }
 
 Label {
@@ -116,36 +117,14 @@ Label {
     border-radius: 8;
 }
 
-@keyframes toBlue {
-    from { background-color: white; }
-    to { background-color: $selected-item; }
-}
-
-@keyframes toRed {
-    from { background-color: white; }
-    to { background-color: $incorrect; }
-}
-
-
-@keyframes toGreen {
-    from { background-color: white; }
-    to { background-color: $correct; }
-}
-
 .correct {
-    animation-name: toGreen;
-    animation-duration: 200ms;
-    animation-fill-mode: forwards;
-    animation-direction: alternate;
+    background-color: $correct;
     color: white;
     border-radius: 8;
 }
 
 .incorrect {
-    animation-name: toRed;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
-    animation-direction: alternate;
+    background-color: $incorrect;
     color: white;
     border-radius: 8;
 }
@@ -267,6 +246,11 @@ Label {
 .mock-type{
     font-size: 10;
     color: blue;
+}
+
+.highlight {
+    background-color: yellow;
+    color: black;
 }
 
 .option-hint {

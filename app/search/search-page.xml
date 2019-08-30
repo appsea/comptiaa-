@@ -44,17 +44,22 @@
                                 </FormattedString>
                             </Label.formattedText>
                         </Label>
-                        <Label text="{{ description }}" textWrap="true"/>
+                        <Label formattedText="{{ description| highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true"/>
 
-                        <Repeater items="{{ options }}" row="1">
-                            <Repeater.itemTemplate>
-                                <GridLayout columns="*" class="{{ correct ? 'correct m-y-5': 'not-selected m-y-5'}}">
-                                    <Label col="0" text="{{ description }}" class="{{ correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
-                                </GridLayout>
-                            </Repeater.itemTemplate>
-                        </Repeater>
+                        <GridLayout columns="*" class="{{ options[0].correct ? 'correct m-y-5': 'not-selected m-y-5'}}">
+                            <Label col="0" formattedText="{{ options[0].description | highlightSearch($parents['ListView'].searchPhrase,  options[0].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[0].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
+                        <GridLayout columns="*" class="{{ options[1].correct ? 'correct m-y-5': 'not-selected m-y-5'}}">
+                            <Label col="0" formattedText="{{ options[1].description | highlightSearch($parents['ListView'].searchPhrase,  options[1].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[1].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
+                        <GridLayout columns="*" class="{{ options[2].correct ? 'correct m-y-5': 'not-selected m-y-5'}}">
+                            <Label col="0" formattedText="{{ options[2].description | highlightSearch($parents['ListView'].searchPhrase,  options[2].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[2].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
+                        <GridLayout columns="*" class="{{ options[3].correct ? 'correct m-y-5': 'not-selected m-y-5'}}">
+                            <Label col="0" formattedText="{{ options[3].description | highlightSearch($parents['ListView'].searchPhrase,  options[3].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[3].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
                         <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
-                        <Label text="{{ explanation }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label formattedText="{{ explanation | highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
