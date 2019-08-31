@@ -70,4 +70,24 @@ export class QuestionUtil {
 
     private constructor() {
     }
+
+    static removeOptionTagFromDescription(question: IQuestion) {
+        for (const option of question.options) {
+            if (option.description.startsWith("A.")) {
+                option.description = option.description.replace("A. ", "").trim();
+            } else if (option.description.startsWith("B.")) {
+                option.description = option.description.replace("B. ", "").trim();
+            } else if (option.description.startsWith("C.")) {
+                option.description = option.description.replace("C. ", "").trim();
+            } else if (option.description.startsWith("D.")) {
+                option.description = option.description.replace("D. ", "").trim();
+            } else if (option.description.startsWith("E.")) {
+                option.description = option.description.replace("E. ", "").trim();
+            } else if (option.description.startsWith("F.")) {
+                option.description = option.description.replace("F. ", "").trim();
+            } else if (option.description.startsWith("G.")) {
+                option.description = option.description.replace("G. ", "").trim();
+            }
+        }
+    }
 }

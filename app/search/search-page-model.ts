@@ -2,6 +2,8 @@ import { EventData, Observable, PropertyChangeData  } from "tns-core-modules/dat
 import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { QuestionService } from "~/services/question.service";
+import { QuestionUtil } from "~/services/question.util";
+import { QuizUtil } from "~/shared/quiz.util";
 import { ObservableProperty } from "../shared/observable-property-decorator";
 import { IQuestion } from "../shared/questions.model";
 
@@ -56,6 +58,7 @@ export class SearchPageModel extends Observable {
             this._questions = this.allQuestions.filter((q) => q.description.toLowerCase().includes(f)
                 || q.options.filter((o) => o.description && o.description.toLowerCase().includes(f)).length > 0
                 || q.explanation.toLowerCase().includes(f)).slice(0, 20);
+            this._questions.forEach((q) => {QuestionUtil.removeOptionTagFromDescription(q); });
             this.publish();
         }
     }
