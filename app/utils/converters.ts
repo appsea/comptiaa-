@@ -2,6 +2,14 @@ import { getResources } from "tns-core-modules/application";
 import { FormattedString } from "tns-core-modules/text/formatted-string";
 import { Span } from "tns-core-modules/text/span";
 
+getResources().formatHtml = (html) => {
+    console.log("FormatHtml called with ", html);
+    const formattedHtml = "<span style='font-size: 35px;'><b>" + html + "</b></span>";
+    console.log("formattedHtml: ", formattedHtml);
+
+    return formattedHtml;
+};
+
 getResources().highlightSearch = (sentence, searchText, className) => {
     const formattedString = new FormattedString();
     if (sentence && sentence.trim() !== "") {

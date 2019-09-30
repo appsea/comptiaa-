@@ -62,6 +62,18 @@
                             <Label col="0" text="{{ options[3].tag + '. '}}"  class="{{ options[3].correct ? 'correct m-l-2 m-y-10': 'not-selected m-l-2 m-y-10'}}" textWrap="true"/>
                             <Label col="1" formattedText="{{ options[3].description | highlightSearch($parents['ListView'].searchPhrase,  options[3].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[3].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
                         </GridLayout>
+                        <GridLayout columns="auto, *" class="{{ options[4].correct ? 'correct m-y-5': 'not-selected m-y-5'}}" visibility="{{ options.length > 4 ? 'visible' : 'collapsed' }}">
+                            <Label col="0" text="{{ options[4].tag + '. '}}"  class="{{ options[4].correct ? 'correct m-l-2 m-y-10': 'not-selected m-l-2 m-y-10'}}" textWrap="true"/>
+                            <Label col="1" formattedText="{{ options[4].description | highlightSearch($parents['ListView'].searchPhrase,  options[4].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[4].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
+                        <GridLayout columns="auto, *" class="{{ options[5].correct ? 'correct m-y-5': 'not-selected m-y-5'}}" visibility="{{ options.length > 5 ? 'visible' : 'collapsed' }}">
+                            <Label col="0" text="{{ options[5].tag + '. '}}"  class="{{ options[5].correct ? 'correct m-l-2 m-y-10': 'not-selected m-l-2 m-y-10'}}" textWrap="true"/>
+                            <Label col="1" formattedText="{{ options[5].description | highlightSearch($parents['ListView'].searchPhrase,  options[5].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[5].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
+                        <GridLayout columns="auto, *" class="{{ options[6].correct ? 'correct m-y-5': 'not-selected m-y-5'}}" visibility="{{ options.length > 6 ? 'visible' : 'collapsed' }}">
+                            <Label col="0" text="{{ options[6].tag + '. '}}"  class="{{ options[6].correct ? 'correct m-l-2 m-y-10': 'not-selected m-l-2 m-y-10'}}" textWrap="true"/>
+                            <Label col="1" formattedText="{{ options[6].description | highlightSearch($parents['ListView'].searchPhrase,  options[6].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[6].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
+                        </GridLayout>
                         <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                         <Label formattedText="{{ explanation | highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>

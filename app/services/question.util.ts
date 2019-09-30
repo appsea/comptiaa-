@@ -68,9 +68,6 @@ export class QuestionUtil {
         return percentage < 100 ? percentage : 100;
     }
 
-    private constructor() {
-    }
-
     static removeOptionTagFromDescription(question: IQuestion) {
         for (const option of question.options) {
             if (option.description.startsWith("A.")) {
@@ -89,5 +86,8 @@ export class QuestionUtil {
                 option.description = option.description.replace("G. ", "").trim();
             }
         }
+    }
+
+    private constructor() {
     }
 }

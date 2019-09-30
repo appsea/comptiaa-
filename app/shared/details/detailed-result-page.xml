@@ -89,6 +89,30 @@
                                        class="{{ (!options[3].selected && !options[3].correct)? 'not-selected m-y-10': (options[3].selected && !options[3].correct)?'incorrect m-y-10': 'correct m-y-10'}}"
                                        textWrap="true"/>
                             </GridLayout>
+                            <GridLayout columns="auto,*" class="{{ (!options[4].selected && !options[4].correct)? 'not-selected m-y-5': (options[4].selected && !options[4].correct)?'incorrect m-y-5': 'correct m-y-5'}}"  visibility="{{ options.length > 4 ? 'visible' : 'collapsed' }}">
+                                <Label col="0" text="{{ options[4].tag + '. ' }}"
+                                       class="{{ (!options[4].selected && !options[4].correct)? 'not-selected m-l-2 m-y-10': (options[4].selected && !options[4].correct)?'incorrect m-l-2 m-y-10': 'correct m-l-2 m-y-10'}}"
+                                       textWrap="true"/>
+                                <Label col="1" formattedText="{{ options[4].description | highlightSearch($parents['ListView'].searchPhrase, (!options[4].selected && !options[4].correct)? 'not-selected m-y-10': (options[4].selected && !options[4].correct)?'incorrect m-y-10': 'correct m-y-10') }}"
+                                       class="{{ (!options[4].selected && !options[4].correct)? 'not-selected m-y-10': (options[4].selected && !options[4].correct)?'incorrect m-y-10': 'correct m-y-10'}}"
+                                       textWrap="true"/>
+                            </GridLayout>
+                            <GridLayout columns="auto,*" class="{{ (!options[5].selected && !options[5].correct)? 'not-selected m-y-5': (options[5].selected && !options[5].correct)?'incorrect m-y-5': 'correct m-y-5'}}"  visibility="{{ options.length > 5 ? 'visible' : 'collapsed' }}">
+                                <Label col="0" text="{{ options[5].tag + '. ' }}"
+                                       class="{{ (!options[5].selected && !options[5].correct)? 'not-selected m-l-2 m-y-10': (options[5].selected && !options[5].correct)?'incorrect m-l-2 m-y-10': 'correct m-l-2 m-y-10'}}"
+                                       textWrap="true"/>
+                                <Label col="1" formattedText="{{ options[5].description | highlightSearch($parents['ListView'].searchPhrase, (!options[5].selected && !options[5].correct)? 'not-selected m-y-10': (options[5].selected && !options[5].correct)?'incorrect m-y-10': 'correct m-y-10') }}"
+                                       class="{{ (!options[5].selected && !options[5].correct)? 'not-selected m-y-10': (options[5].selected && !options[5].correct)?'incorrect m-y-10': 'correct m-y-10'}}"
+                                       textWrap="true"/>
+                            </GridLayout>
+                            <GridLayout columns="auto,*" class="{{ (!options[6].selected && !options[6].correct)? 'not-selected m-y-5': (options[6].selected && !options[6].correct)?'incorrect m-y-5': 'correct m-y-5'}}"  visibility="{{ options.length > 6 ? 'visible' : 'collapsed' }}">
+                                <Label col="0" text="{{ options[6].tag + '. ' }}"
+                                       class="{{ (!options[6].selected && !options[6].correct)? 'not-selected m-l-2 m-y-10': (options[6].selected && !options[6].correct)?'incorrect m-l-2 m-y-10': 'correct m-l-2 m-y-10'}}"
+                                       textWrap="true"/>
+                                <Label col="1" formattedText="{{ options[6].description | highlightSearch($parents['ListView'].searchPhrase, (!options[6].selected && !options[6].correct)? 'not-selected m-y-10': (options[6].selected && !options[6].correct)?'incorrect m-y-10': 'correct m-y-10') }}"
+                                       class="{{ (!options[6].selected && !options[6].correct)? 'not-selected m-y-10': (options[6].selected && !options[6].correct)?'incorrect m-y-10': 'correct m-y-10'}}"
+                                       textWrap="true"/>
+                            </GridLayout>
                         </StackLayout>
 
                         <StackLayout visibility="{{ skipped ? 'visible' : 'collapsed' }}">
