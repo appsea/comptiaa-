@@ -2,12 +2,46 @@ import { getResources } from "tns-core-modules/application";
 import { FormattedString } from "tns-core-modules/text/formatted-string";
 import { Span } from "tns-core-modules/text/span";
 
-getResources().formatHtml = (html) => {
-    console.log("FormatHtml called with ", html);
-    const formattedHtml = "<span style='font-size: 35px;'><b>" + html + "</b></span>";
-    console.log("formattedHtml: ", formattedHtml);
+getResources().linkUrls = (string: string) => {
+    const tokens: Array<string> = getResources().tokenizeByUrl(string);
+    const formattedString = new FormattedString();
+    tokens.forEach((str) => {
+        const span = new Span();
+        span.text = str;
+        if (str.indexOf("http") === 0 || str.indexOf("www") === 0) {
+            span.textDecoration = "underline";
+            span.className = "url";
+        }
+        formattedString.spans.push(span);
+    });
 
-    return formattedHtml;
+    return formattedString;
+};
+
+getResources().tokenizeByUrl = (string: string) => {
+    const tokens: Array<string> = [];
+    const HTTP: string = "http";
+    const WWW: string = "www";
+    let searchString = HTTP;
+    if (string.indexOf(HTTP) === -1 || string.indexOf(HTTP) > string.indexOf(WWW)) {
+        searchString = WWW;
+    }
+    if (string.indexOf(searchString) !== -1) {
+        tokens.push(string.substr(0, string.indexOf(searchString)));
+        const remaining: string = string.substr(string.indexOf(searchString));
+        if (remaining.indexOf(" ") !== -1) {
+            tokens.push(remaining.substr(0, remaining.indexOf(" ")));
+            getResources().tokenizeByUrl(remaining.substr(remaining.indexOf(" "))).forEach((t) => {
+                tokens.push(t);
+            });
+        } else {
+            tokens.push(remaining);
+        }
+    } else {
+        tokens.push(string);
+    }
+
+    return tokens;
 };
 
 getResources().highlightSearch = (sentence, searchText, className) => {

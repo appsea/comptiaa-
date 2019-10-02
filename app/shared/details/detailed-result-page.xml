@@ -151,7 +151,7 @@
                         </StackLayout>
 
                         <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
-                        <Label formattedText="{{ explanation | highlightSearch($parents['ListView'].searchPhrase, '')}}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label formattedText="{{ explanation | linkUrls}}" tap="openUrl" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>

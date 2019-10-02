@@ -3,6 +3,7 @@ import { AndroidActivityBackPressedEventData, AndroidApplication } from "tns-cor
 import { EventData, Observable } from "tns-core-modules/data/observable";
 import { isAndroid } from "tns-core-modules/platform";
 import { topmost } from "tns-core-modules/ui/frame";
+import { Label } from "tns-core-modules/ui/label";
 import * as ListView from "tns-core-modules/ui/list-view";
 import { NavigatedData, Page } from "tns-core-modules/ui/page";
 import { QuestionViewModel } from "~/question/question-view-model";
@@ -71,4 +72,9 @@ export function incorrect(): void {
 export function skipped(): void {
     vm.skipped();
     list.scrollToIndex(0);
+}
+
+export function openUrl(arg: EventData) {
+    const lbl: Label = arg.object as Label;
+    QuizUtil.openUrl(lbl.text);
 }

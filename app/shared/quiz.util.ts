@@ -1,4 +1,6 @@
+import { getResources } from "tns-core-modules/application";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
+import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as frame from "tns-core-modules/ui/frame";
 import * as utils from "tns-core-modules/utils/utils";
 
@@ -47,6 +49,35 @@ export class QuizUtil {
         } else if (isIOS) {
             frame.topmost().nativeView.endEditing(true);
         }
+    }
+
+    static openUrl(str: string) {
+        const tokens: Array<string> = getResources().tokenizeByUrl(str);
+        const urls: Array<string> = QuizUtil.extractUrls(tokens);
+        if (urls.length === 1) {
+            utils.openUrl(urls[0]);
+        } else if (urls.length > 1) {
+            dialogs.action({
+                message: "Please select the URL you want to visit:",
+                cancelButtonText: "Cancel",
+                actions: urls
+            }).then((result) => {
+                utils.openUrl(result);
+            });
+        }
+    }
+
+    static extractUrls(tokens: Array<string>) {
+        const urls: Array<string> = [];
+        tokens.forEach((str) => {
+            if (str.indexOf("http") === 0) {
+                urls.push(str);
+            } else if (str.indexOf("www") === 0) {
+                urls.push("https://" + str);
+            }
+        });
+
+        return urls;
     }
 
     private constructor() {

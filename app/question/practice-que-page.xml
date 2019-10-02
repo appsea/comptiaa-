@@ -70,10 +70,11 @@
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>
+                <Label text="{{ question.show }}"/>
                 <Label id="explanationHeader" text="Explanation: " marginTop="20dpi"
                        visibility="{{ question && question.show ? 'visible' : 'collapsed' }}" style="font-weight: bold"
                        textWrap="true"/>
-                <Label id="explanation" text="{{ question && question.explanation}}" marginBottom="5dpi" textWrap="true"
+                <Label id="explanation" formattedText="{{ question && question.explanation | linkUrls }}" tap="openUrl" marginBottom="5dpi" textWrap="true"
                        visibility="{{ question.show ? 'visible' : 'collapsed' }}"/>
                 <Label id="defaultExplanation"
                        text="Explanation Coming Soon. Feel free to update it yourself by clicking on following button:)"

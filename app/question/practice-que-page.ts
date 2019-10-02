@@ -15,6 +15,7 @@ import { ScrollView } from "tns-core-modules/ui/scroll-view";
 import { TextView } from "tns-core-modules/ui/text-view";
 import { AdService } from "~/admob/ad.service";
 import { ConnectionService } from "~/shared/connection.service";
+import { QuizUtil } from "~/shared/quiz.util";
 import { SelectedPageService } from "~/shared/selected-page-service";
 import * as constantsModule from "../shared/constants";
 import { QuestionViewModel } from "./question-view-model";
@@ -176,4 +177,9 @@ export function selectOption(args): void {
         }
     }
     optionList.refresh();
+}
+
+export function openUrl(arg: EventData) {
+    const lbl: Label = arg.object as Label;
+    QuizUtil.openUrl(lbl.text);
 }

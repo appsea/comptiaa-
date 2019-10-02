@@ -29,7 +29,7 @@
     <GridLayout rows="auto, *, auto">
         <SearchBar row="0" hint="Search Questions..." id="searchBar" text="{{ searchPhrase }}" submit="{{ onSearchSubmit }}" clear="{{ clear }}" class="{{ searching ? 'searching search-bar' : 'not-searching search-bar' }}" visibility="{{ searching ? 'visible': 'collapsed'}}"/>
         <GridLayout row="1" rows="auto, *">
-            <ListView  row="1" id="listView" class="margin" items="{{ questions }}" separatorColor="blue" itemTemplateSelector="$index">
+            <ListView  row="1" id="listView" class="margin" items="{{ questions }}" separatorColor="blue">
                 <ListView.itemTemplate>
                     <StackLayout>
                         <Label marginTop="20dpi" textAlignment="center" class="font-weight-bold">
@@ -75,7 +75,7 @@
                             <Label col="1" formattedText="{{ options[6].description | highlightSearch($parents['ListView'].searchPhrase,  options[6].correct ? 'correct m-y-10': 'not-selected m-y-10')}}" class="{{ options[6].correct ? 'correct m-y-10': 'not-selected m-y-10'}}" textWrap="true"/>
                         </GridLayout>
                         <Label text="Explanation: " style="font-weight: bold; margin-top: 10dpi"  textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
-                        <Label formattedText="{{ explanation | highlightSearch($parents['ListView'].searchPhrase, '') }}" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
+                        <Label formattedText="{{ explanation | linkUrls }}" tap="openUrl" textWrap="true" visibility="{{ explanation ? 'visible' : 'collapsed' }}"/>
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
