@@ -70,7 +70,6 @@
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>
-                <Label text="{{ question.show }}"/>
                 <Label id="explanationHeader" text="Explanation: " marginTop="20dpi"
                        visibility="{{ question && question.show ? 'visible' : 'collapsed' }}" style="font-weight: bold"
                        textWrap="true"/>
