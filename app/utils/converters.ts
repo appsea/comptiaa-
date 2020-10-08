@@ -1,6 +1,6 @@
-import { getResources } from "tns-core-modules/application";
-import { FormattedString } from "tns-core-modules/text/formatted-string";
-import { Span } from "tns-core-modules/text/span";
+import { getResources } from "@nativescript/core/application";
+import { FormattedString } from "@nativescript/core/text/formatted-string";
+import { Span } from "@nativescript/core/text/span";
 
 getResources().linkUrls = (string: string) => {
     const tokens: Array<string> = getResources().tokenizeByUrl(string);
