@@ -13,10 +13,11 @@ const hashSalt = Date.now().toString();
 
 module.exports = env => {
     // Add your custom Activities, Services and other Android app components here.
-    const appComponents = [
-        "tns-core-modules/ui/frame",
-        "tns-core-modules/ui/frame/activity",
-    ];
+    const appComponents = env.appComponents || [];
+    appComponents.push(...[
+        "@nativescript/core/ui/frame",
+        "@nativescript/core/ui/frame/activity",
+    ]);
 
     const platform = env && (env.android && "android" || env.ios && "ios");
     if (!platform) {
@@ -58,8 +59,9 @@ module.exports = env => {
 
     const tsConfigPath = resolve(projectRoot, "tsconfig.tns.json");
 
-    if (platform === "ios") {
-        entries["tns_modules/tns-core-modules/inspector_modules"] = "inspector_modules.js";
+    const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("tns-core-modules") > -1);
+    if (platform === "ios" && !areCoreModulesExternal) {
+        entries["tns_modules/@nativescript/core/inspector_modules"] = "inspector_modules";
     };
 
     let sourceMapFilename = nsWebpack.getSourceMapFilename(hiddenSourceMap, __dirname, dist);
@@ -287,7 +289,7 @@ module.exports = env => {
         config.plugins.push(new nsWebpack.NativeScriptSnapshotPlugin({
             chunk: "vendor",
             requireModules: [
-                "tns-core-modules/bundle-entry-points",
+                "@nativescript/core/bundle-entry-points",
             ],
             projectRoot,
             webpackConfig: config,

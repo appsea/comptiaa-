@@ -1,8 +1,8 @@
-import { getResources } from "tns-core-modules/application";
-import { isAndroid, isIOS } from "tns-core-modules/platform";
-import * as dialogs from "tns-core-modules/ui/dialogs";
-import * as frame from "tns-core-modules/ui/frame";
-import * as utils from "tns-core-modules/utils/utils";
+import { getResources } from "@nativescript/core/application";
+import { isAndroid, isIOS } from "@nativescript/core/platform";
+import * as dialogs from "@nativescript/core/ui/dialogs";
+import * as frame from "@nativescript/core/ui/frame";
+import * as utils from "@nativescript/core/utils/utils";
 
 export class QuizUtil {
 

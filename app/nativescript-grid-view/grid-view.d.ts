@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 
-import { EventData } from "tns-core-modules/data/observable";
-import { ContainerView, KeyedTemplate, PercentLength, Template } from "tns-core-modules/ui/core/view";
-import { ItemEventData, ItemsSource, TemplatedItemsView } from "tns-core-modules/ui/list-view";
+import { EventData } from "@nativescript/core/data/observable";
+import { ContainerView, KeyedTemplate, PercentLength, Template } from "@nativescript/core/ui/core/view";
+import { ItemEventData, ItemsSource, TemplatedItemsView } from "@nativescript/core/ui/list-view";
 
 export type Orientation = "horizontal" | "vertical";
 

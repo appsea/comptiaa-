@@ -9,13 +9,13 @@
  6. (if exists) at the end of module test tearDownModule() module function is called
 
 */
-import * as appSettings from "tns-core-modules/application-settings";
-import * as Application from "tns-core-modules/application";
-import * as timer from "tns-core-modules/timer";
-import * as trace from "tns-core-modules/trace";
-import * as types from "tns-core-modules/utils/types";
-import * as platform from "tns-core-modules/platform";
-import {topmost} from "tns-core-modules/ui/frame";
+import * as appSettings from "@nativescript/core/application-settings";
+import * as Application from "@nativescript/core/application";
+import * as timer from "@nativescript/core/timer";
+import * as trace from "@nativescript/core/trace";
+import * as types from "@nativescript/core/utils/types";
+import * as platform from "@nativescript/core/platform";
+import {topmost} from "@nativescript/core/ui/frame";
 import * as constantsModule from "../shared/constants";
 
 const sdkVersion = parseInt(platform.device.sdkVersion);

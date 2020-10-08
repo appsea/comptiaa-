@@ -1,8 +1,8 @@
 /**
  * Created by rakesh on 15-Nov-2017.
  */
-import { Observable } from "tns-core-modules/data/observable";
-import { isAndroid } from "tns-core-modules/platform";
+import { Observable } from "@nativescript/core/data/observable";
+import { isAndroid } from "@nativescript/core/platform";
 import { PersistenceService } from "~/services/persistence.service";
 import { QuestionUtil } from "~/services/question.util";
 import { IPracticeStats, IQuestion } from "~/shared/questions.model";

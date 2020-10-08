@@ -1,4 +1,4 @@
-import { isIOS, screen } from "tns-core-modules/platform";
+import { isIOS, screen } from "@nativescript/core/platform";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { PersistenceService } from "~/services/persistence.service";
 import {

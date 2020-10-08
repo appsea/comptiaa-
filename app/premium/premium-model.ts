@@ -1,7 +1,7 @@
 import * as purchase from "nativescript-purchase";
-import * as appSettings from "tns-core-modules/application-settings";
-import { EventData, Observable } from "tns-core-modules/data/observable";
-import * as dialogs from "tns-core-modules/ui/dialogs";
+import * as appSettings from "@nativescript/core/application-settings";
+import { EventData, Observable } from "@nativescript/core/data/observable";
+import * as dialogs from "@nativescript/core/ui/dialogs";
 import { AdService } from "~/admob/ad.service";
 import { PersistenceService } from "~/services/persistence.service";
 import { QuestionService } from "~/services/question.service";
