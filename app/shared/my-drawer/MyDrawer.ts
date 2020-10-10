@@ -1,6 +1,6 @@
-import * as SocialShare from "nativescript-social-share";
+import * as SocialShare from "nativescript-social-share-ns-7";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "@nativescript/core/application";
+import * as app from "tns-core-modules/application";;
 import { EventData } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { topmost } from "@nativescript/core/ui/frame";
