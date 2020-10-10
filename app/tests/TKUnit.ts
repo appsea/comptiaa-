@@ -10,8 +10,9 @@
  6. (if exists) at the end of module test tearDownModule() module function is called
 
 */
-
-import { isIOS, Trace, Device } from '@nativescript/core';
+import * as appSettings from "tns-core-modules/application-settings";
+import * as constantsModule from "../shared/constants";
+import { Trace, Device } from '@nativescript/core';
 import * as types from '@nativescript/core/utils/types';
 
 const sdkVersion = parseInt(Device.sdkVersion);
@@ -383,6 +384,26 @@ function prepareModal() {
     }
 
     prepared = true;
+}
+
+export function clearQuestionSize() {
+    appSettings.remove(constantsModule.QUESTIONS_SIZE);
+}
+
+export function clearKey(key:string) {
+    appSettings.remove(key);
+}
+
+export function saveNumber(key:string, value:number) {
+    appSettings.setNumber(key, value);
+}
+
+export function saveString(key:string, value:string) {
+    appSettings.setString(key, value);
+}
+
+export function saveBoolean(key:string, value:boolean) {
+    appSettings.setBoolean(key, value);
 }
 
 function doModalAndroid(quitLoop: () => boolean, timeoutSec: number, shouldThrow: boolean = true) {
