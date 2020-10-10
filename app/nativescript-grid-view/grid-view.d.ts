@@ -15,8 +15,9 @@ limitations under the License.
 ***************************************************************************** */
 
 import { EventData } from "@nativescript/core/data/observable";
-import { ContainerView, KeyedTemplate, PercentLength, Template } from "@nativescript/core/ui/core/view";
+import { ContainerView, KeyedTemplate, Template } from "@nativescript/core/ui/core/view";
 import { ItemEventData, ItemsSource, TemplatedItemsView } from "@nativescript/core/ui/list-view";
+import { PercentLength } from "@nativescript/core/ui/styling/style-properties";
 
 export type Orientation = "horizontal" | "vertical";
 
