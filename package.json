@@ -10,13 +10,13 @@
     "android": "npm run android"
   },
   "dependencies": {
-    "@nativescript/core": "~7.0.11",
+    "@nativescript/appversion": "^2.0.0",
+    "@nativescript/core": "^7.0.11",
+    "@nativescript/social-share": "^2.0.1",
     "crypto-js": "^4.0.0",
-    "nativescript-appversion": "^1.4.4",
     "nativescript-grid-view": "^5.1.0",
     "nativescript-purchase": "^2.0.14",
     "nativescript-screen-orientation": "^2.0.0",
-    "nativescript-social-share-ns-7": "^11.6.0",
     "nativescript-theme-core": "~1.0.6",
     "nativescript-toast": "^2.0.0",
     "nativescript-ui-chart": "8.0.2",
@@ -42,9 +42,7 @@
     "ts-node": "^8.2.0",
     "tslint": "^5.18.0",
     "typescript": "3.9.7",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "tns-core-modules": "^6.5.20",
-    "tns-platform-declarations": "^6.5.15"
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "readme": "NativeScript Application",
   "main": "app.js"

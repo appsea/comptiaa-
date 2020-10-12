@@ -10,7 +10,7 @@
  6. (if exists) at the end of module test tearDownModule() module function is called
 
 */
-import * as appSettings from "tns-core-modules/application-settings";
+import * as appSettings from "@nativescript/core/application-settings";
 import * as constantsModule from "../shared/constants";
 import { Trace, Device } from '@nativescript/core';
 import * as types from '@nativescript/core/utils/types';

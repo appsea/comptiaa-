@@ -1,4 +1,4 @@
-import * as appVersion from "nativescript-appversion";
+import * as appVersion from "@nativescript/appversion";
 import { EventData, Observable } from "@nativescript/core/data/observable";
 
 import { ObservableProperty } from "~/shared/observable-property-decorator";

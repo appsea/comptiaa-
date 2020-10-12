@@ -1,11 +1,11 @@
+import * as app from "@nativescript/core/application";
 import { EventData } from "@nativescript/core/data/observable";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import { topmost } from "@nativescript/core/ui/frame";
 import { GridLayout } from "@nativescript/core/ui/layouts/grid-layout";
 import * as utils from "@nativescript/core/utils/utils";
-import * as SocialShare from "nativescript-social-share-ns-7";
+import * as SocialShare from "@nativescript/social-share";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-import * as app from "tns-core-modules/application";
 import { SettingsService } from "~/services/settings.service";
 import { ConnectionService } from "../connection.service";
 import { MyDrawerViewModel } from "./MyDrawer-view-model";

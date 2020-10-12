@@ -1,7 +1,7 @@
 /**
  * Created by rakesh on 15-Nov-2017.
  */
-import * as appVersion from "nativescript-appversion";
+import * as appVersion from "@nativescript/appversion";
 import * as Toast from "nativescript-toast";
 import * as appSettings from "@nativescript/core/application-settings";
 import { Observable } from "@nativescript/core/data/observable";
