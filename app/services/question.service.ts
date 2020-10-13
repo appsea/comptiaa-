@@ -2,12 +2,12 @@
  * Created by rakesh on 15-Nov-2017.
  */
 import * as appVersion from "@nativescript/appversion";
-import * as Toast from "nativescript-toast";
 import * as appSettings from "@nativescript/core/application-settings";
 import { Observable } from "@nativescript/core/data/observable";
 import { isAndroid } from "@nativescript/core/platform";
 import * as dialogs from "@nativescript/core/ui/dialogs";
 import * as utils from "@nativescript/core/utils/utils";
+import * as Toast from "nativescript-toast";
 import { ConnectionService } from "~/shared/connection.service";
 import { IQuestion } from "~/shared/questions.model";
 import { QuizUtil } from "~/shared/quiz.util";

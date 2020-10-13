@@ -1,10 +1,7 @@
-import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { AndroidActivityBackPressedEventData, AndroidApplication } from "@nativescript/core/application";
-import { EventData, Observable } from "@nativescript/core/data/observable";
+import { EventData } from "@nativescript/core/data/observable";
 import { isAndroid, isIOS } from "@nativescript/core/platform";
-import { topmost } from "@nativescript/core/ui/frame";
 import { NavigatedData, Page } from "@nativescript/core/ui/page";
-import { CreateViewEventData } from "@nativescript/core/ui/placeholder";
 import { Progress } from "@nativescript/core/ui/progress";
 import { QuestionViewModel } from "~/question/question-view-model";
 import { SelectedPageService } from "~/shared/selected-page-service";
